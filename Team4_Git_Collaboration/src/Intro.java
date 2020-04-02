@@ -6,8 +6,9 @@ public class Intro {
 
 		System.out.println("키보드 좋은거 사고 싶다 -준수-");
 
-		
 		System.out.println("오늘은 강의실에서 꽃 구경했습니다.");
+		
+		System.out.println("막내 인사 박습니다 엄지희입니다!! :)");
 
 
 	}
