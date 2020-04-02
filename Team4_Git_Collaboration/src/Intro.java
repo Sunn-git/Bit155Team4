@@ -10,6 +10,8 @@ public class Intro {
 		
 		System.out.println("막내 인사 박습니다 엄지희입니다!! :)");
 
+		System.out.println("1~10까지 이해하고싶다. 아니라면 2 4 6 8 이라도...");
+
 
 	}
 
