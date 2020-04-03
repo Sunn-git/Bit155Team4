@@ -1,0 +1,416 @@
+[1mdiff --git a/Team4_Git_Collaboration/src/AbstractFactoryPattern/AbstractFactoryTest.java b/Team4_Git_Collaboration/src/AbstractFactoryPattern/AbstractFactoryTest.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1044160[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/AbstractFactoryPattern/AbstractFactoryTest.java[m
+[36m@@ -0,0 +1,16 @@[m
+[32m+[m[32mpackage AbstractFactoryPattern;[m
+[32m+[m
+[32m+[m[32mpublic class AbstractFactoryTest {[m
+[32m+[m
+[32m+[m	[32mpublic static void main(String[] args) {[m
+[32m+[m		[32mComputer pc = ComputerFactory.getComputer(new PCFactory("2 GB","500 GB","2.4Ghz"));[m
+[32m+[m		[32mComputer server = ComputerFactory.getComputer(new ServerFactory("16 GB", "1 TB", "2.9 GHz"));[m
+[32m+[m		[32mSystem.out.println("AbstractFactory PC config::"+pc);[m
+[32m+[m		[32mSystem.out.println("AbstractFactory server config::"+server);[m
+[32m+[m[41m		[m
+[32m+[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m
+[1mdiff --git a/Team4_Git_Collaboration/src/AbstractFactoryPattern/Computer.java b/Team4_Git_Collaboration/src/AbstractFactoryPattern/Computer.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..00e043d[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/AbstractFactoryPattern/Computer.java[m
+[36m@@ -0,0 +1,18 @@[m
+[32m+[m[32mpackage AbstractFactoryPattern;[m
+[32m+[m[32m//√ﬂªÛ∆—≈‰∏Æ[m[41m [m
+[32m+[m[32m//super class[m
+[32m+[m[32m//º¯º≠µµ[m[41m [m
+[32m+[m[32m//Computer -> PC -> Server -> ComputerAbstractFactory -> PCFactory[m[41m [m
+[32m+[m[32m//SeverFactory -> ComputerFactory -> AbstractFactoryTest[m
+[32m+[m[32mpublic abstract class Computer {[m
+[32m+[m[41m	[m
+[32m+[m	[32mpublic abstract String getRAM();[m
+[32m+[m	[32mpublic abstract String getHDD();[m
+[32m+[m	[32mpublic abstract String getCPU();[m
+[32m+[m[41m	[m
+[32m+[m	[32m@Override[m
+[32m+[m	[32mpublic String toString() {[m
+[32m+[m		[32mreturn "RAM = " + this.getRAM()+",HDD="+this.getHDD()+",CPU="+this.getCPU();[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/Team4_Git_Collaboration/src/AbstractFactoryPattern/ComputerAvstractFactory.java b/Team4_Git_Collaboration/src/AbstractFactoryPattern/ComputerAvstractFactory.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..59ec899[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/AbstractFactoryPattern/ComputerAvstractFactory.java[m
+[36m@@ -0,0 +1,9 @@[m
+[32m+[m[32mpackage AbstractFactoryPattern;[m
+[32m+[m[32m//√ﬂªÛ ∆—≈‰∏Æ ø™»∞¿ª «œ±‚¿ß«ÿ[m[41m [m
+[32m+[m[32m//¿Œ≈Õ∆‰¿ÃΩ∫ ∂«¥¬ √ﬂªÛ≈¨∑°Ω∫∞° « ø‰«œ¥Ÿ.[m[41m [m
+[32m+[m[32mpublic interface ComputerAvstractFactory {[m
+[32m+[m	[32mpublic Computer createComputer();[m[41m [m
+[32m+[m
+[32m+[m[32m}[m
+[32m+[m[32m//createComputer()¥¬ ∏ﬁº“µÂ¿« ∏Æ≈œ≈∏¿‘¿Ã super class¿Œ Computer() ∏ﬁº“µÂ∏¶ ø¿πˆ∂Û¿Ãµ˘«œø©[m
+[32m+[m[32m//∞¢∞¢¿« º≠∫Í ≈¨∑°Ω∫∏¶ ∏Æ≈œ«ÿ¡Ÿºˆ¿÷¥Ÿ. <<¿⁄πŸ¿« ¥Ÿ«¸º∫[m[41m [m
+\ No newline at end of file[m
+[1mdiff --git a/Team4_Git_Collaboration/src/AbstractFactoryPattern/ComputerFactory.java b/Team4_Git_Collaboration/src/AbstractFactoryPattern/ComputerFactory.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..addf9e0[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/AbstractFactoryPattern/ComputerFactory.java[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32mpackage AbstractFactoryPattern;[m
+[32m+[m[32m//¿Ã º≠∫Í≈¨∑°Ω∫µÈ¿ª ª˝º∫«œ±‚ ¿ß«ÿ ≈¨∂Û¿Ãæ∆Æ ƒ⁄µÂø° ¡¢¡°¿∏∑Œ ¡¶∞¯µ«¥¬ ƒ¡Ω¥∏” ≈¨∑°Ω∫∏¶ ª˝º∫.[m
+[32m+[m[32mpublic class ComputerFactory {[m
+[32m+[m[41m	[m
+[32m+[m	[32mpublic static Computer getComputer(ComputerAvstractFactory factory) {[m
+[32m+[m		[32mreturn factory.createComputer();[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m[32m}[m
+[32m+[m[32m//getComputer æ’ø° static ∏ﬁº“µÂø° æ’ø°º≠ ±∏«ˆ«— PCFactory , ServerFactory ¿ŒΩ∫≈œΩ∫∏¶[m[41m [m
+[32m+[m[32m//≥÷¿Ω¿∏∑Œ if-else∞° æ¯æÓµµ ø¯«œ¥¬ º≠∫Í≈¨∑°Ω∫¿« ¿ŒΩ∫≈œΩ∫∏¶ ª˝º∫«“ºˆ ¿÷∞‘ µ»¥Ÿ.[m
+[1mdiff --git a/Team4_Git_Collaboration/src/AbstractFactoryPattern/PC.java b/Team4_Git_Collaboration/src/AbstractFactoryPattern/PC.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b521835[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/AbstractFactoryPattern/PC.java[m
+[36m@@ -0,0 +1,34 @@[m
+[32m+[m[32mpackage AbstractFactoryPattern;[m
+[32m+[m[32m//sub class -1[m
+[32m+[m[32mpublic class PC extends Computer{[m
+[32m+[m[41m	[m
+[32m+[m	[32mprivate String ram;[m
+[32m+[m	[32mprivate String hdd;[m
+[32m+[m	[32mprivate String cpu;[m
+[32m+[m[41m	[m
+[32m+[m	[32mpublic PC(String ram, String hdd, String cpu) {[m
+[32m+[m[41m		[m
+[32m+[m		[32mthis.ram = ram;[m
+[32m+[m		[32mthis.hdd = hdd;[m
+[32m+[m		[32mthis.cpu = cpu;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m@Override[m
+[32m+[m	[32mpublic String getRAM() {[m
+[32m+[m		[32m// TODO Auto-generated method stub[m
+[32m+[m		[32mreturn this.ram;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m@Override[m
+[32m+[m	[32mpublic String getHDD() {[m
+[32m+[m		[32m// TODO Auto-generated method stub[m
+[32m+[m		[32mreturn this.hdd;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m@Override[m
+[32m+[m	[32mpublic String getCPU() {[m
+[32m+[m		[32m// TODO Auto-generated method stub[m
+[32m+[m		[32mreturn this.cpu;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/Team4_Git_Collaboration/src/AbstractFactoryPattern/PCFactory.java b/Team4_Git_Collaboration/src/AbstractFactoryPattern/PCFactory.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a061a00[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/AbstractFactoryPattern/PCFactory.java[m
+[36m@@ -0,0 +1,22 @@[m
+[32m+[m[32mpackage AbstractFactoryPattern;[m
+[32m+[m[32m//sub classø° ¥Î«— ∆—≈‰∏Æ ≈¨∑°Ω∫[m[41m [m
+[32m+[m[32mpublic class PCFactory implements ComputerAvstractFactory {[m
+[32m+[m[41m	[m
+[32m+[m	[32mprivate String ram;[m
+[32m+[m	[32mprivate String hdd;[m
+[32m+[m	[32mprivate String cpu;[m
+[32m+[m[41m	[m
+[32m+[m	[32mpublic PCFactory(String ram, String hdd, String cpu) {[m
+[32m+[m		[32mthis.ram = ram;[m
+[32m+[m		[32mthis.hdd = hdd;[m
+[32m+[m		[32mthis.cpu = cpu;[m
+[32m+[m[41m		[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m@Override[m
+[32m+[m	[32mpublic Computer createComputer() {[m
+[32m+[m		[32mreturn new PC(ram,hdd,cpu);[m
+[32m+[m	[32m}[m
+[32m+[m[41m	[m
+[32m+[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/Team4_Git_Collaboration/src/AbstractFactoryPattern/Server.java b/Team4_Git_Collaboration/src/AbstractFactoryPattern/Server.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f6fef57[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/AbstractFactoryPattern/Server.java[m
+[36m@@ -0,0 +1,33 @@[m
+[32m+[m[32mpackage AbstractFactoryPattern;[m
+[32m+[m[32m//sub class -2[m
+[32m+[m[32mpublic class Server extends Computer{[m
+[32m+[m[41m	[m
+[32m+[m	[32mprivate String ram;[m
+[32m+[m	[32mprivate String hdd;[m
+[32m+[m	[32mprivate String cpu;[m
+[32m+[m[41m	[m
+[32m+[m	[32mpublic Server(String ram, String hdd, String cpu) {[m
+[32m+[m		[32mthis.ram = ram;[m
+[32m+[m		[32mthis.hdd = hdd;[m
+[32m+[m		[32mthis.cpu = cpu;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m@Override[m
+[32m+[m	[32mpublic String getRAM() {[m
+[32m+[m		[32m// TODO Auto-generated method stub[m
+[32m+[m		[32mreturn this.ram;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m@Override[m
+[32m+[m	[32mpublic String getHDD() {[m
+[32m+[m		[32m// TODO Auto-generated method stub[m
+[32m+[m		[32mreturn this.hdd;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m@Override[m
+[32m+[m	[32mpublic String getCPU() {[m
+[32m+[m		[32m// TODO Auto-generated method stub[m
+[32m+[m		[32mreturn this.cpu;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/Team4_Git_Collaboration/src/AbstractFactoryPattern/ServerFactory.java b/Team4_Git_Collaboration/src/AbstractFactoryPattern/ServerFactory.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5789d2c[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/AbstractFactoryPattern/ServerFactory.java[m
+[36m@@ -0,0 +1,21 @@[m
+[32m+[m[32mpackage AbstractFactoryPattern;[m
+[32m+[m[32m//sub classø° ¥Î«— ∆—≈‰∏Æ ≈¨∑°Ω∫[m
+[32m+[m[32mpublic class ServerFactory implements ComputerAvstractFactory {[m
+[32m+[m[41m	[m
+[32m+[m	[32mprivate String ram;[m
+[32m+[m	[32mprivate String hdd;[m
+[32m+[m	[32mprivate String cpu;[m
+[32m+[m[41m	[m
+[32m+[m	[32mpublic ServerFactory(String ram, String hdd, String cpu) {[m
+[32m+[m		[32mthis.ram = ram;[m
+[32m+[m		[32mthis.hdd = hdd;[m
+[32m+[m		[32mthis.cpu = cpu;[m
+[32m+[m[41m		[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m@Override[m
+[32m+[m	[32mpublic Computer createComputer() {[m
+[32m+[m		[32mreturn new Server(ram,hdd,cpu)	;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/Team4_Git_Collaboration/src/bo/Ex01_Sql.java b/Team4_Git_Collaboration/src/bo/Ex01_Sql.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..9f3fff6[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/bo/Ex01_Sql.java[m
+[36m@@ -0,0 +1,150 @@[m
+[32m+[m[32mpackage bo;[m
+[32m+[m
+[32m+[m[32mpublic class Ex01_Sql {[m
+[32m+[m
+[32m+[m
+[32m+[m[32m/*[m
+[32m+[m[32mCREATE TABLE s_emp([m
+[32m+[m[32m id             NUMBER(7) primary key,[m
+[32m+[m[32m name           VARCHAR2(25),[m
+[32m+[m[32m mailid         VARCHAR2(8),[m
+[32m+[m[32m start_date     DATE,[m
+[32m+[m[32m manager_id     NUMBER(7),[m
+[32m+[m[32m title          VARCHAR2(25),[m
+[32m+[m[32m dept_id        NUMBER(7),[m
+[32m+[m[32m salary         NUMBER(11, 2),[m
+[32m+[m[32m commission_pct NUMBER(4, 2)[m
+[32m+[m[32m);[m
+[32m+[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m  1, 'π⁄±∏∞Ô', 'sky98',[m
+[32m+[m[32m   to_date('03-05-1990','dd-mm-yyyy'), NULL, 'ªÁ¿Â',[m
+[32m+[m[32m   118, 5000, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   2, 'º’∏Ìº∫', '2xxsig',[m
+[32m+[m[32m   to_date('08-05-1990','dd-mm-yyyy'), 1, '±‚»π∫Œ¿Â',[m
+[32m+[m[32m   110, 3000, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   3, '¿Ã¿∫º±', 'ch21175',[m
+[32m+[m[32m   to_date('17-06-1991','dd-mm-yyyy'), 1, 'øµæ˜∫Œ¿Â',[m
+[32m+[m[32m   102, 3500, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   4, 'º≠¿«»´', 'mquickto',[m
+[32m+[m[32m   to_date('07-04-1990','dd-mm-yyyy'), 1, '√—π´∫Œ¿Â',[m
+[32m+[m[32m   101, 3000, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   5, '±ËΩ…º±', 'aropebur',[m
+[32m+[m[32m   to_date('04-05-1990','dd-mm-yyyy'), 1, '¿ŒªÁ∫Œ¿Â',[m
+[32m+[m[32m   118, 3200, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   6, '¿¸¡ˆøµ', 'murguhar',[m
+[32m+[m[32m   to_date('18-01-1991','dd-mm-yyyy'), 2, '∞˙¿Â',[m
+[32m+[m[32m   110, 2400, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   7, '±Ë¡§πÃ', 'enchu',[m
+[32m+[m[32m   to_date('14-05-1990','dd-mm-yyyy'), 2, '∞˙¿Â',[m
+[32m+[m[32m   111, 2400, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   8, 'Ω≈±‚øı', 'bbiri',[m
+[32m+[m[32m   to_date('07-04-1990','dd-mm-yyyy'), 2, '∞˙¿Â',[m
+[32m+[m[32m   112, 2100, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   9, '¿ÃªÛ«Â', 'acatchpo',[m
+[32m+[m[32m   to_date('09-02-1992','dd-mm-yyyy'), 2, '∞˙¿Â',[m
+[32m+[m[32m   113, 2300, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   10, '√÷º¯√∂', 'mhavel',[m
+[32m+[m[32m   to_date('27-02-1991','dd-mm-yyyy'), 2, '∞˙¿Â',[m
+[32m+[m[32m   113, 2300, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   11, '√÷¡§º±', 'cmagee',[m
+[32m+[m[32m   to_date('14-05-1990','dd-mm-yyyy'), 3, 'øµæ˜¥Î«•¿ÃªÁ',[m
+[32m+[m[32m   102, 2450, 10);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   12, 'æ»¿∫∞Ê', 'hgiljum',[m
+[32m+[m[32m   to_date('18-01-1992','dd-mm-yyyy'), 3, 'øµæ˜¥Î«•¿ÃªÁ',[m
+[32m+[m[32m   103, 2500, 12.5);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   13, '±ËºÆøÏ', 'ysedeghi',[m
+[32m+[m[32m   to_date('18-02-1991','dd-mm-yyyy'), 3, 'øµæ˜¥Î«•¿ÃªÁ',[m
+[32m+[m[32m   104, 2650, 10);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   14, 'π⁄º∫±‘', 'mnguyen',[m
+[32m+[m[32m   to_date('22-01-1992','dd-mm-yyyy'), 3, 'øµæ˜¥Î«•¿ÃªÁ',[m
+[32m+[m[32m   105, 2650, 15);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   15, 'Ω≈¡æ« ', 'adumas',[m
+[32m+[m[32m   to_date('09-10-1991','dd-mm-yyyy'), 3, 'øµæ˜¥Î«•¿ÃªÁ',[m
+[32m+[m[32m   106, 2400, 17.5);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   16, '¿Ã±‚√∂', 'emaduro',[m
+[32m+[m[32m   to_date('07-02-1992','dd-mm-yyyy'), 6, 'ªÁø¯',[m
+[32m+[m[32m   110, 2400, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   17, '±∏ø¯ªÛ', 'gsmith',[m
+[32m+[m[32m   to_date('08-05-1990','dd-mm-yyyy'), 6, 'ªÁø¯',[m
+[32m+[m[32m   110, 940, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   18, 'º≠¡§¡÷', 'anozaki',[m
+[32m+[m[32m   to_date('09-02-1991','dd-mm-yyyy'), 7, 'ªÁø¯',[m
+[32m+[m[32m   111, 1200, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   19, 'æ»√¢»Ø', 'vpatel',[m
+[32m+[m[32m   to_date('06-08-1991','dd-mm-yyyy'), 7, 'ªÁø¯',[m
+[32m+[m[32m   111, 795, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   20, '¿±¡§º˜', 'cnewman',[m
+[32m+[m[32m   to_date('21-07-1991','dd-mm-yyyy'), 8, 'ªÁø¯',[m
+[32m+[m[32m   112, 750, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   21, '¿Â«ˆ√∂','amarkari',[m
+[32m+[m[32m   to_date('26-05-1991','dd-mm-yyyy'), 8, 'ªÁø¯',[m
+[32m+[m[32m   112, 850, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   22, '¿Â«˝º˜', 'echang',[m
+[32m+[m[32m   to_date('30-11-1990','dd-mm-yyyy'), 9, 'ªÁø¯',[m
+[32m+[m[32m   113, 800, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   23, '∞≠ø¨π¸', 'rpatel',[m
+[32m+[m[32m   to_date('17-10-1990','dd-mm-yyyy'), 9, 'ªÁø¯',[m
+[32m+[m[32m   106, 795, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   24, 'ø¿¿∫∞Ê', 'bdancs',[m
+[32m+[m[32m   to_date('17-05-1991','dd-mm-yyyy'), 10, 'ªÁø¯',[m
+[32m+[m[32m   113, 860, NULL);[m
+[32m+[m[32mINSERT INTO s_emp VALUES ([m
+[32m+[m[32m   25, '¿ÃøÎ»£', 'sschwart',[m
+[32m+[m[32m   to_date('09-05-1991','dd-mm-yyyy'), 10, 'ªÁø¯',[m
+[32m+[m[32m   113, 1100, NULL);[m
+[32m+[m[32mCOMMIT;[m
+[32m+[m[32m*/[m
+[32m+[m[41m [m
+[32m+[m[32m/*[m
+[32m+[m[32m1. 112, 118∫Œº≠∏¶ ¥ÎªÛ¿∏∑Œ ∞˙¿Â∞˙ ªÁø¯¿« ¿Ã∏ß, ¡˜±ﬁ, ±ﬁø©, ∫Œº≠ID∏¶ ¡∂»∏«œµ«, ±ﬁø©¥¬ 1500 ¿ÃªÛ 4000 ¿Ã«œ¿Œ ¡˜ø¯∏∏ √‚∑¬µ«µµ∑œ «œΩ√ø¿.[m
+[32m+[m[32m¥‹, ±ﬁø©∞° ∏π¿∫ ªÁ∂˜∫Œ≈Õ »≠∏Èø° √‚∑¬«’¥œ¥Ÿ.[m
+[32m+[m
+[32m+[m[32m2. ∞¸∏Æ¿⁄∞° æ¯¥¬ ¡˜ø¯¿« ¿Ã∏ß, ¡˜±ﬁ, ±ﬁø©∏¶ ¡∂»∏«œΩ√ø¿.[m
+[32m+[m[32m3. ¡˜±ﬁ¿Ã ∫Œ¿Â¿ÃæÓæﬂ «œ∞Ì ±ﬁø©¥¬ 3000 ¿ÃªÛ¿ª πﬁ¥¬ ¡˜ø¯¿« ¿Ã∏ß, ¡˜±ﬁ, ±ﬁø©∏¶[m
+[32m+[m[32m¡∂»∏«œΩ√ø¿.[m
+[32m+[m[32m4. ¡˜±ﬁ¿Ã ∫Œ¿Â∞˙ ∞˙¿Â¿Œ ªÁ∂˜µÈ¿ª ¥ÎªÛ¿ª ¿Ã∏ß, ¡˜±ﬁ, ±ﬁø©∏¶ ¡∂»∏«œΩ√ø¿. ¥‹, ∫Œº≠¥¬ 112, 113, 117, 118 ∫Œº≠¡ﬂø°º≠ ¡∂»∏ «ÿæﬂ «œ∏Á, ±ﬁø©¥¬ 2300 ¿ÃªÛ 3000 ªÁ¿Ã¿Œ ¡˜ø¯∏∏ ¡∂»∏µ«µµ∑œ «œΩ√ø¿.[m
+[32m+[m[32m5. ¡˜ø¯¿« ø¨∫¿ø° 1000 ¿ª ¥ı«— ∞™¿ª ¡∂»∏«œΩ√ø¿. ø¨∫¿¿∫ ±ﬁø©ø° 16¿ª ∞ˆ«œ∏È µ»¥Ÿ. ¥‹, ø¨∫¿¿∫ ALIAS∏¶ ¡ˆ¡§«œø© √‚∑¬µ«µµ∑œ «—¥Ÿ.[m
+[32m+[m[32m7. √‚∑¬∞·∞˙∞° ¥Ÿ¿Ω∞˙ ∞∞µµ∑œ ¡∂»∏«œΩ√ø¿. ¡˜ø¯ ±ﬁø©[m
+[32m+[m[32m---------------------------------[m
+[32m+[m[32mπ⁄±∏∞Ô ªÁ¿Â¿« ±ﬁø© 5,000 ø¯ ¿‘¥œ¥Ÿ.[m
+[32m+[m[32mº’∏Ìº∫ ±‚»π∫Œ¿Â¿« ±ﬁø© 3,000 ø¯ ¿‘¥œ¥Ÿ.[m
+[32m+[m[32m¿Ã¿∫º± øµæ˜∫Œ¿Â¿« ±ﬁø© 3,500 ø¯ ¿‘¥œ¥Ÿ.[m
+[32m+[m[32mº≠¿«»´ √—π´∫Œ¿Â¿« ±ﬁø© 3,000 ø¯ ¿‘¥œ¥Ÿ.[m
+[32m+[m[32m±ËΩ…º± ¿ŒªÁ∫Œ¿Â¿« ±ﬁø© 3,200 ø¯ ¿‘¥œ¥Ÿ.[m
+[32m+[m[32m...[m
+[32m+[m[32m...[m
+[32m+[m[32m8. ƒøπÃº«¿ª πﬁ¥¬ ¡˜ø¯∞˙ ∞¸∏Æ¿⁄∞° ¿÷¥¬ ¡˜ø¯¿ª ¥ÎªÛ¿∏∑Œ ±ﬁø©∏¶ 2500¿ÃªÛ πﬁ¥¬ ¡˜ø¯∏∏ ¡∂»∏«œΩ√ø¿.[m
+[32m+[m[32m9. ∞¢ ∫Œº≠∫∞ ø˘±ﬁ¿« √÷º⁄∞™ ±∏«œ±‚[m
+[32m+[m[32m10. ¡˜√•∫∞ √÷º“ ø˘±ﬁ¿ª ±∏«œ¥¬µ• ∫Œ¿Â(±‚»π, øµæ˜, √—π´, ¿ŒªÁ)¿∫ ¡¶ø‹«œ∞Ì ±∏«œΩ√ø¿[m
+[32m+[m[32m11. ¡˜√•∫∞ ∆Ú±’ ø˘±ﬁ ±∏«œ±‚[m
+[32m+[m[32m12. ¡˜√•∫∞ ¿Œø¯ºˆ ±∏«œ±‚[m
+[32m+[m[32m13. ¡˜√•∫∞ √÷¥Î ø˘±ﬁ¿ª ±∏«œ¥¬µ• ±◊ √÷¥Î ø˘±ﬁ¿Ã 2000 ¿ÃªÛ¿Œ ∞Õ∏∏ √‚∑¬«œΩ√ø¿[m
+[32m+[m[32m14. ¡˜√•∫∞ √÷º“ ø˘±ﬁ¿ª ±∏«œ¥¬µ• ∫Œ¿Â(±‚»π, øµæ˜, √—π´, ¿ŒªÁ)¿∫ ¡¶ø‹«œ∞Ì ø˘±ﬁ¿Ã ≥Ù¿∫ ªÁ∂˜∫Œ≈Õ √‚∑¬«œΩ√ø¿[m
+[32m+[m[32m15. ¡˜√•∫∞ ∆Ú±’ ø˘±ﬁ¿ª ±∏«œ¥¬µ• ªÁø¯¿∫ ¡¶ø‹«œ∞Ì ø˘±ﬁ¿Ã ≥∑¿∫ ªÁ∂˜∫Œ≈Õ √‚∑¬«œΩ√ø¿[m
+[32m+[m[32m16. ¡˜√•∫∞ ±ﬁø©¿« «’¿ª √‚∑¬«œ¥¬µ• ªÁø¯¿∫ ¡¶ø‹«œ∞Ì ∂« ±◊ ±ﬁø©¿« «’¿Ã 2000 ¿ÃªÛ¿Œ ∞Õ∏∏ ≥™ø¿∞‘ «œ∞Ì ¡˜√•∫∞ ±ﬁø©¿« «’¿Ã ≥Ù¿∫ º¯¿∏∑Œ √‚∑¬«œΩ√ø¿[m
+[32m+[m[32m*/[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/Team4_Git_Collaboration/src/bo/Ex01_Subquery.java b/Team4_Git_Collaboration/src/bo/Ex01_Subquery.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..0accf78[m
+[1m--- /dev/null[m
+[1m+++ b/Team4_Git_Collaboration/src/bo/Ex01_Subquery.java[m
+[36m@@ -0,0 +1,21 @@[m
+[32m+[m[32mpackage bo;[m
+[32m+[m
+[32m+[m[32mpublic class Ex01_Subquery {[m
+[32m+[m
+[32m+[m[32m}[m
+[32m+[m[32m/*--subquery[m
+[32m+[m[32m1. single row subquery : subquery¿« ∞·∞˙∞° 1∞≥¿« row∏¶ ∞°¡˙∂ß(¥‹¿œ∞™) : «—∞≥¿« ∞™ /¥‹¿œƒ√∑≥[m
+[32m+[m[32m2. multi row subquery : subquery¿« ∞·∞˙∞° 1∞≥ ¿ÃªÛ¿« row∏¶ ∞°¡˙∂ß(ø©∑Ø∞≥¿« ∞™) /¥‹¿œƒ√∑≥[m
+[32m+[m[32m±∏∫–«œ¥¬ ¿Ã¿Ø : ªÁøÎµ«¥¬ ø¨ªÍ¿⁄¿« ¬˜¿Ã[m
+[32m+[m[32mmulti row (IN , NOT IN) (ANY , ALL)[m
+[32m+[m[32mALL : sal > 1000 and sal > 2000 and ...[m
+[32m+[m[32mANY : sal > 1000 or sal > 2000 or ...[m
+[32m+[m[32m¡§¿«(subquery)[m
+[32m+[m[32m1.∞˝»£æ»ø° ¿÷æÓæﬂ«—¥Ÿ (select avg(sal) from emp)[m
+[32m+[m[32m2.¥„¿œƒ√∑≥¿∏∑Œ ±∏º∫ >> select sal, deptno from emp, >> (X) ¥‹¿œƒ√∑≥¿Ã æ∆¥œ¥Ÿ[m
+[32m+[m[32m3.¥‹µ∂¿∏∑Œ Ω««‡ ∞°¥…«ÿæﬂ «—¥Ÿ![m
+[32m+[m
+[32m+[m[32mΩ««‡º¯º≠[m
+[32m+[m[32m1.subquery ∏’¿˙ Ω««‡[m
+[32m+[m[32m2.subquery¿« ∞·∞˙∏¶ ∞°¡ˆ∞Ì main query Ω««‡[m
+[32m+[m[32m*/[m
+[1mdiff --git a/Team4_Git_Collaboration/src/jun/Class.java b/Team4_Git_Collaboration/src/jun/Class.java[m
+[1mindex 887cde8..5a28728 100644[m
+[1m--- a/Team4_Git_Collaboration/src/jun/Class.java[m
+[1m+++ b/Team4_Git_Collaboration/src/jun/Class.java[m
+[36m@@ -1,9 +1,5 @@[m
+ package jun;[m
+ [m
+ public class Class {[m
+[31m-	public static void main(String[] args) {[m
+[31m-		System.out.println("≈∞∫∏µÂ ª°∏Æ ªÁ∞ÌΩÕ¥Ÿ ");[m
+[31m-		System.out.println("≥ª∞° ªÁ∏È ∫∏º∫¿Ã «¸µµ ªÁæﬂµ ");[m
+[31m-		System.out.println("±◊≥… ¡˝ø° ∫∏≥ª¡÷¡ˆ...");[m
+[31m-	}[m
+[32m+[m
+ }[m

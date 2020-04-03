@@ -8,7 +8,7 @@ public class AbstractFactoryTest {
 		System.out.println("AbstractFactory PC config::"+pc);
 		System.out.println("AbstractFactory server config::"+server);
 		
-
+		System.out.println("이건 준수가 쓰는거");
 	}
 
 }
