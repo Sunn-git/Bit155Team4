@@ -2,7 +2,7 @@ package hee;
 
 public class Class {
 	public static void main(String[] args) {
-		System.out.println("0402 ì„ ì–¸ë‹ˆê°€ í´ë˜ìŠ¤ ë‚˜ëˆ„ì–´ì£¼ì—ˆë‹¤.");
-		System.out.println("ì´ì œ ì´ê±´ ë‚´ í´ë˜ìŠ¤");
+		System.out.println("0402 ¼±¾ğ´Ï°¡ Å¬·¡½º ³ª´©¾îÁÖ¾ú´Ù.");
+		System.out.println("ÀÌÁ¦ ÀÌ°Ç ³» Å¬·¡½º");
 	}
 }
